@@ -3,8 +3,8 @@ import axios from 'axios';
 
 export function InteractiveTrackWidget({ trackId, onPlay, currentlyPlayingId }) {
   const containerRef = useRef(null);
-
   const isPlaying = trackId === currentlyPlayingId;
+
   useEffect(() => {
     if (!window.SpotifyIframeApi) return;
 
@@ -35,11 +35,13 @@ export function InteractiveTrackWidget({ trackId, onPlay, currentlyPlayingId }) 
     ></div>
   );
 }
+
 export default function Spotify() {
   const [selectedid, Setselectedid] = useState(null);
-  const [previousid,setpreviousid] = useState(null);
-  const [Trackinfo, setTrackinfo] = useState(null);
+  const [previousid, setpreviousid] = useState(null);
   const [randomTracks, setRandomTracks] = useState([]); 
+  
+  const [recommendedTracks, setRecommendedTracks] = useState([]);
   
   const [isSpotifyReady, setIsSpotifyReady] = useState(false);
   
@@ -60,53 +62,49 @@ export default function Spotify() {
     }
   }, []);
   
-
   const handleFetchClick = async () => {
     try {
       const response = await axios.get("http://127.0.0.1:8000/random");
-      const data = response.data; 
-      setRandomTracks(data); 
-      console.log("Fetched Tracks:", data);
+      setRandomTracks(response.data); 
+      setRecommendedTracks([]); 
     } catch (error) {
       console.error("Fetch failed:", error);
     }
   }
 
-
   const handleTrackPlayed = (extractedId) => {
     Setselectedid(extractedId);
-    console.log(extractedId);
   }
-
   
-  const newsongrecomendation = async()=>{
+  const newsongrecomendation = async () => {
     if (!selectedid){
-      console.log('Click somthing some song or somethin')
-      return
+      console.log('Click a song first!');
+      return;
     }
-    setpreviousid(selectedid)
+    setpreviousid(selectedid);
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/recomendations', 
-        { id: selectedid});
+      const response = await axios.post('http://127.0.0.1:8000/recomendations', { id: selectedid });
       console.log("Got Recommendations!", response.data);
-
+      
+      setRecommendedTracks(response.data);
+      
     } catch (error) {
       console.error("Backend Validation Error:", error.response?.data);
-    }}
+    }
+  }
 
-    
   return (
     <div className="p-4 flex flex-col gap-4">
       <button 
-        className='bg-green-900 border-2 text-white p-2 rounded' 
+        className='bg-green-900 border-2 text-white p-2 font-bold rounded' 
         onClick={handleFetchClick}
       > 
         GET 5 RANDOM TRACKS
       </button>
       
       {randomTracks.length > 0 && (
-        <div className="mt-8">
+        <div className="mt-4">
           <h3 className="text-black font-bold mb-4">Your Random Playlist:</h3>
           
           {isSpotifyReady ? (
@@ -125,13 +123,40 @@ export default function Spotify() {
           )}
         </div>
       )}
-      <div>
-        <button
-        className='bg-red-950 border-2 text-white p-2 rounded'
-        onClick={newsongrecomendation}>
-          Click here
-        </button>
-      </div>
+      
+      {selectedid && (
+        <div className="mt-8 bg-gray-100 p-4 rounded-xl border-2 border-gray-200">
+          <p className="mb-2 text-gray-700">Currently selected: <strong>{selectedid}</strong></p>
+          <button
+            className='bg-red-950 border-2 text-white font-bold p-2 rounded w-full'
+            onClick={newsongrecomendation}
+          >
+            GET RECOMMENDATIONS
+          </button>
+        </div>
+      )}
+
+      {recommendedTracks.length > 0 && (
+        <div className="mt-8 p-4 bg-red-50 border-2 border-red-200 rounded-xl">
+          <h3 className="text-red-900 font-bold mb-4 text-xl">Recommended For You:</h3>
+          
+          {isSpotifyReady ? (
+            <div className="flex flex-col gap-4"> 
+              {recommendedTracks.map((trackId) => (
+                <InteractiveTrackWidget 
+                  key={`rec-${trackId}`} 
+                  trackId={trackId} 
+                  onPlay={handleTrackPlayed} 
+                  currentlyPlayingId={selectedid} 
+                />
+              ))}
+            </div>
+          ) : (
+            <p>Loading audio players...</p>
+          )}
+        </div>
+      )}
+
     </div>
   );
 }
