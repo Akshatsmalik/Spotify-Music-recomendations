@@ -1,10 +1,9 @@
-version: '3.8'
-
 services:
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
+    image: music-recommendation-backend-img
     container_name: music-recommendation-backend
     ports:
       - "8000:8000"
@@ -12,12 +11,13 @@ services:
       - ./backend:/app
     environment:
       - PYTHONUNBUFFERED=1
-    restart: unless-stopped
+    restart: unless-stopped 
 
   frontend:
     build:
       context: "./music recomendation"
       dockerfile: Dockerfile
+    image: music-recommendation-frontend-img
     container_name: music-recommendation-frontend
     ports:
       - "5173:5173"

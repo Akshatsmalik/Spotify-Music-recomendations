@@ -1,11 +1,11 @@
-FROM node:18-alpine
+FROM node:22-slim
 
 WORKDIR /app
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
+# Copy only package.json to avoid Windows lockfile conflicts
+COPY package.json ./
 
-# Install dependencies
+# Install dependencies cleanly for Linux
 RUN npm install
 
 # Copy the rest of the application files
