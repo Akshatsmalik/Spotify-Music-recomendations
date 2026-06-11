@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from sklearn.metrics.pairwise import cosine_similarity
 from fastapi.middleware.cors import CORSMiddleware
+import random
 
 app=FastAPI()
 
@@ -19,8 +20,9 @@ app.add_middleware(
 
 @app.get('/random')
 async def starting():
-    data1=data[data['release_year']>2000]['id'].sample(5).tolist()
-    return data1
+    dat = data[data['release_year'] > 2000].sample(10)
+    # print(dat['clusters'])
+    return dat['id'].tolist()
 
 class RecRequest(BaseModel):
     id: str
@@ -28,7 +30,7 @@ class RecRequest(BaseModel):
 @app.post('/recomendations')
 async def recomendation(req:RecRequest):
     try:
-        index=data[(data['id']==req.id)&(data['release_year']>=2010)].index[0]
+        index=data[data['id']==req.id].index[0]
     except IndexError:
         return 'wrong id'
     
@@ -40,8 +42,13 @@ async def recomendation(req:RecRequest):
     similarity=cosine_similarity(targetvector,clustervector)[0]
 
     clustersongs['similarity']=similarity
-    recommendation = clustersongs[clustersongs['id'] != id].sort_values(by='similarity', ascending=False)
-    return recommendation['id'].head(5).tolist()
+    recommendation = clustersongs[clustersongs['id'] != req.id].sort_values(by='similarity', ascending=False).sample(20)
+    randomcluster=random.randint(0,39)
+    randomsong=data[data['clusters']==randomcluster].sample(3)
+    recommendation = pd.concat([recommendation,randomsong])
+    top_20 = recommendation.sample(20)
+    # print(top_20['clusters'])
+    return top_20.sample(n=min(10, len(top_20)))['id'].tolist()
 
 @app.post('/recommendations2')
 async def get_recommendations(id):

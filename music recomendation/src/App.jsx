@@ -1,7 +1,7 @@
-import LandingPage from './components/LandingPage'
+import MainPage from './components/VisionPlayer/MainPage'
 
 function App() {
-  return <LandingPage />
+  return <MainPage />
 }
 
 export default App
