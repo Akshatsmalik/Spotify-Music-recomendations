@@ -34,7 +34,7 @@ export default function PlayerBar() {
           </button>
         </div>
 
-        <div className="player-meta">
+        {/* <div className="player-meta">
           {details ? (
             <img src={details.thumbnail_url} alt="Track" className="player-thumb" crossOrigin="anonymous"/>
           ) : (
@@ -52,7 +52,7 @@ export default function PlayerBar() {
                 <div className="player-fill" style={{ width: '0%' }}></div>
                 <div className="player-knob" style={{ left: '0%' }}></div>
              </div>
-          </div>
+          </div> */}
           
           <div className="text-xs text-white/50 w-10">0:00</div>
         </div>
