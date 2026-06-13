@@ -34,13 +34,13 @@ export default function PlayerBar() {
           </button>
         </div>
 
-        {/* <div className="player-meta">
+        <div className="player-meta">
           {details ? (
             <img src={details.thumbnail_url} alt="Track" className="player-thumb" crossOrigin="anonymous"/>
           ) : (
             <div className="player-thumb bg-gray-700"></div>
           )}
-          <div className="flex-1 overflow-hidden min-w-[120px]">
+         {/*  <div className="flex-1 overflow-hidden min-w-[120px]">
              <div className="text-white text-sm font-medium truncate">{details ? details.title : 'No Track'}</div>
              <div className="text-white/60 text-xs truncate">{details ? details.author_name : 'No Artist'}</div>
           </div>
