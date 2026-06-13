@@ -8,7 +8,7 @@ function AlbumCarousel({ activeIndex, onSelect }) {
 
   const fetchRandomList = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:8000/random")
+      const response = await axios.get("https://spotify-music-recomendations.onrender.com/random")
       const list=response.data
       // console.log(list)
       //issues so the issue is that it always stays in that single cluster and keep recomending the same songs again and again
