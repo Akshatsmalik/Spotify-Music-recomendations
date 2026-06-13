@@ -34,7 +34,7 @@ export default function PlayerBar() {
           </button>
         </div>
 
-        <div className="player-meta">
+        {/* <div className="player-meta">
           {details ? (
             <img src={details.thumbnail_url} alt="Track" className="player-thumb" crossOrigin="anonymous"/>
           ) : (
@@ -55,7 +55,7 @@ export default function PlayerBar() {
           </div> 
           
           <div className="text-xs text-white/50 w-10">0:00</div>
-        </div>
+        </div> */}
 
         <div className="flex items-center gap-3 text-white/80 pl-4 border-l border-white/10">
            <button className="player-icon-btn">
