@@ -1,4 +1,4 @@
-# Spotify Music Recommendation System
+# Spotify Music Recommendation System (https://spotify-music-recomendations.vercel.app/)
 
 ## Overview
 This project is a web-based music recommendation system built using a Spotify dataset. It consists of a React (Vite) frontend and a Python (FastAPI) backend. The application takes a song ID as input and returns a curated list of similar songs that you might enjoy.
