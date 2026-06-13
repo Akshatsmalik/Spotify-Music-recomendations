@@ -18,6 +18,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+@app.get("/")
+async def root():
+    return {"status": "ok"}
+
 @app.get('/random')
 async def starting():
     dat = data[data['release_year'] > 2000].sample(10)
