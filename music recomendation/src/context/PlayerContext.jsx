@@ -45,7 +45,7 @@ export function PlayerProvider({ children }) {
   const fetchRandomTracks = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get("http://127.0.0.1:8000/random");
+      const response = await axios.get("https://spotify-music-recomendations.onrender.com/random");
       const trackIds = response.data;
       setRandomTracks(trackIds);
       
@@ -88,7 +88,7 @@ export function PlayerProvider({ children }) {
     if (!selectedTrackId) return;
     setIsLoading(true);
     try {
-      const response = await axios.post('http://127.0.0.1:8000/recomendations', { id: selectedTrackId });
+      const response = await axios.post('https://spotify-music-recomendations.onrender.com/recomendations', { id: selectedTrackId });
       const trackIds = response.data;
       console.log(trackIds)
       
