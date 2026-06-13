@@ -54,8 +54,8 @@ export default function PlayerBar() {
              </div>
           </div> 
           
-          <div className="text-xs text-white/50 w-10">0:00</div>
-        </div> */}
+          <div className="text-xs text-white/50 w-10">0:00</div> */}
+        </div>
 
         <div className="flex items-center gap-3 text-white/80 pl-4 border-l border-white/10">
            <button className="player-icon-btn">
