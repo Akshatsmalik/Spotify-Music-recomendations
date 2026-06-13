@@ -64,7 +64,7 @@ export default function Spotify() {
   
   const handleFetchClick = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:8000/random");
+      const response = await axios.get("https://spotify-music-recomendations.onrender.com/random");
       setRandomTracks(response.data); 
       setRecommendedTracks([]); 
     } catch (error) {
@@ -84,7 +84,7 @@ export default function Spotify() {
     setpreviousid(selectedid);
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/recomendations', { id: selectedid });
+      const response = await axios.post('https://spotify-music-recomendations.onrender.com/recomendations', { id: selectedid });
       console.log("Got Recommendations!", response.data);
       
       setRecommendedTracks(response.data);
