@@ -40,12 +40,12 @@ export default function PlayerBar() {
           ) : (
             <div className="player-thumb bg-gray-700"></div>
           )}
-         {/*  <div className="flex-1 overflow-hidden min-w-[120px]">
+           <div className="flex-1 overflow-hidden min-w-[120px]">
              <div className="text-white text-sm font-medium truncate">{details ? details.title : 'No Track'}</div>
              <div className="text-white/60 text-xs truncate">{details ? details.author_name : 'No Artist'}</div>
           </div>
           
-          <div className="text-xs text-white/50 w-10 text-right">0:00</div>
+         {/* <div className="text-xs text-white/50 w-10 text-right">0:00</div>
           
           <div className="player-progress">
              <div className="player-track">
