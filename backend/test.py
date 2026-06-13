@@ -91,19 +91,19 @@ async def get_recommendations(id):
     # This will return a list of just the IDs (e.g., [104, 209, 311, 49, 88])
     return recommendations['id'].head(5).tolist()
 
-def get_id(data):
-    # arr=[]
-    # for i in data['id']:
-    #     arr.append(i)4
-    data1=data['id'].sample(5).tolist()
-    return data1
+# def get_id(data):
+#     # arr=[]
+#     # for i in data['id']:
+#     #     arr.append(i)4
+#     data1=data['id'].sample(5).tolist()
+#     return data1
 
-def main():
-    data=pd.read_csv(r'tracks.csv')
-    df=pd.DataFrame(data)
-    response=get_id(df)
-    print(response)
-    return 
+# def main():
+#     data=pd.read_csv(r'tracks.csv')
+#     df=pd.DataFrame(data)
+#     response=get_id(df)
+#     print(response)
+#     return 
 
 if __name__=='__main__':
     print(main())
