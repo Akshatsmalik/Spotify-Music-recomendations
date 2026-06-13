@@ -12,7 +12,7 @@ data=pd.read_pickle(r'recomendation2.pickle')
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173","https://spotify-music-recomendations.vercel.app/"],
+    allow_origins=["http://localhost:5173","https://spotify-music-recomendations.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
